@@ -3,13 +3,7 @@ package com.SpringJpa.Entities;
 import java.util.ArrayList;
 import java.util.List;
 
-import jakarta.persistence.CascadeType;
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
+import jakarta.persistence.*;
 
 @Entity
 public class InstitutionEntity {
@@ -27,11 +21,17 @@ public class InstitutionEntity {
     @Column
     private String createdAt;
 
-    /* 
-    @OneToMany(mappedBy = "institutions",cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Company> companies = new ArrayList<>();
+    @ManyToOne
+    @JoinColumn(name="company_id")
+    private Company company;
 
-    */
+    @OneToMany(mappedBy = "institution")
+    private List<CustomerEntity> customers;
+
+    @OneToMany(mappedBy = "institution")
+    private List<ProductEntity> products;
+
+
     public Long getId() {
         return id;
     }

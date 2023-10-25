@@ -1,10 +1,6 @@
 package com.SpringJpa.Entities;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 
 @Entity
 public class ProductEntity {
@@ -21,6 +17,10 @@ public class ProductEntity {
 
     @Column
     private String description;
+
+    @ManyToOne
+    @JoinColumn(name = "company")
+    private InstitutionEntity institution;
 
     public Long getId() {
         return id;
