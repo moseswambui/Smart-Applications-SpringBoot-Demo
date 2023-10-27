@@ -29,31 +29,9 @@ public class Company {
     @Column
     private String contactInfo;
 
-    /* 
-    @OneToMany(mappedBy = "company",cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<ProductEntity> products = new ArrayList<>();
+    @OneToMany(mappedBy = "company")
+    private List<InstitutionEntity> institutions;
 
-    
-    @OneToMany(mappedBy = "company",cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<InstitutionEntity> institutions = new ArrayList<>();
-    
-   public List<InstitutionEntity> getInstitution() {
-        return institutions;
-    }
-
-    public void setInstitution(List<InstitutionEntity> institution) {
-        this.institutions = institution;
-    }
-   
-    public List<ProductEntity> getProducts() {
-        return products;
-    }
-    
-
-    public void setProducts(List<ProductEntity> products) {
-        this.products = products;
-    }
-     */
     public Long getId() {
         return id;
     }

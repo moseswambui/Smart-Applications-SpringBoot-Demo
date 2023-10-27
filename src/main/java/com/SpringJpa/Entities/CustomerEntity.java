@@ -1,11 +1,6 @@
 package com.SpringJpa.Entities;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 
 @Entity
 public class CustomerEntity {
@@ -28,6 +23,10 @@ public class CustomerEntity {
 
     @Column
     private String emailAddress;
+
+    @ManyToOne
+    @JoinColumn(name = "institution_id")
+    private InstitutionEntity institution;
 
     public Long getId() {
         return id;
