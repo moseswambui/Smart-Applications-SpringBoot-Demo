@@ -24,6 +24,7 @@ public class BasicAuthController {
         return "Now is" + LocalTime.now();
     }
 
+    /*
     @PostMapping(value = "user", consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<String> createUser(@RequestBody(required = true)BasicAuthUser userRequest)
             throws Exception{
@@ -31,4 +32,5 @@ public class BasicAuthController {
         //var encryptedUsername = EncryDecryptUtil.encryptAes(userRequest.getUsername(), SECRET_KEY);
 
     }
+    */
 }

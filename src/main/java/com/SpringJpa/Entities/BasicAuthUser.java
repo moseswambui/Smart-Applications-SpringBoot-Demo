@@ -1,15 +1,19 @@
 package com.SpringJpa.Entities;
 
-import org.springframework.data.annotation.Id;
+import jakarta.persistence.*;
 
+
+@Entity
 public class BasicAuthUser {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int userId;
 
     private String username;
 
     private String passwordHash;
+
 
     private String salt;
 
