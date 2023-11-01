@@ -1,11 +1,9 @@
 package com.SpringJpa.Entities;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 
 @Entity
+//@Table(name = "user")
 public class Users {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -14,12 +12,17 @@ public class Users {
     private String firstName;
 
     private String lastName;
-
+    @Column(unique = true)
     private String email;
 
     private String password;
 
     public Users(int user_id, String first_name, String last_name, String email, String password) {
+        this.userId = user_id;
+        this.firstName = first_name;
+        this.lastName = last_name;
+        this.email = email;
+        this.password = password;
     }
 
     public Integer getUserId() {

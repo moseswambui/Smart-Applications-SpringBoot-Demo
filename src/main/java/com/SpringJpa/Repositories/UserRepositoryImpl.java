@@ -2,7 +2,11 @@ package com.SpringJpa.Repositories;
 
 import com.SpringJpa.Entities.Users;
 import com.SpringJpa.Exceptions.EtAuthException;
+
+import org.bouncycastle.crypto.generators.BCrypt;
+import org.bouncycastle.crypto.generators.OpenBSDBCrypt;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
@@ -20,11 +24,14 @@ public class UserRepositoryImpl implements UserRepository{
     private static final String SQL_COUNT_BY_EMAIL = "SELECT COUNT(*) FROM USERS WHERE EMAIL = ?";
 
     private static final String SQL_FIND_BY_ID = "SELECT USER_ID, FIRST_NAME, LAST_NAME, EMAIL, PASSWORD FROM USERS WHERE USER_ID=?";
+
+    private static final String SQL_FIND_BY_EMAIL = "SELECT USER_ID, FIRST_NAME, LAST_NAME, EMAIL, PASSWORD FROM USERS WHERE EMAIL = ?";
     @Autowired
     JdbcTemplate jdbcTemplate;
 
     @Override
     public Integer create(String firstName, String lastName, String email, String password) throws EtAuthException {
+        //String hashedPassword = BCrypt.passwordToByteArray(password, BCrypt.passwordToByteArray("mu))
         try {
             KeyHolder keyHolder = new GeneratedKeyHolder();
 
@@ -45,7 +52,22 @@ public class UserRepositoryImpl implements UserRepository{
 
     @Override
     public Users findByEmailAndPassword(String email, String password) throws EtAuthException {
-        return null;
+        try {
+            System.out.println("Executing SQL QUERY " + SQL_FIND_BY_EMAIL);
+            Users users = jdbcTemplate.queryForObject(SQL_FIND_BY_EMAIL, new Object[]{email}, userRowMapper);
+
+            System.out.println("Email from DB: " + users.getEmail());
+            System.out.println("Password from DB: " + users.getPassword());
+
+            if (password.equals(users.getPassword())) {
+                return users;
+            }else {
+                throw new EtAuthException("Invalid Password");
+            }
+
+        }catch (EmptyResultDataAccessException e){
+            throw new EtAuthException("User Not Found");
+        }
     }
 
     @Override
