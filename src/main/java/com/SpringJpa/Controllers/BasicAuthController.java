@@ -29,6 +29,18 @@ public class BasicAuthController {
         return "Now is" + LocalTime.now();
     }
 
+
+    @PostMapping("/login")
+    public ResponseEntity<Map<String , String>> loginUser(@RequestBody Map<String, Object> userMap){
+        String email =(String) userMap.get("email");
+        String password =(String) userMap.get("password");
+
+        Users users = userService.validateUser(email, password);
+        Map<String, String> map = new HashMap<>();
+        map.put("message", "logged in successfully");
+
+        return new ResponseEntity<>(map, HttpStatus.OK);
+    }
     @PostMapping("/register")
     public ResponseEntity<Map<String, String>> registerUser(@RequestBody Map<String, Object> userMap){
         String firstName = (String) userMap.get("firstName");

@@ -20,6 +20,11 @@ public class Users {
     private String password;
 
     public Users(int user_id, String first_name, String last_name, String email, String password) {
+        this.userId = user_id;
+        this.firstName = first_name;
+        this.lastName = last_name;
+        this.email = email;
+        this.password = password;
     }
 
     public Integer getUserId() {
