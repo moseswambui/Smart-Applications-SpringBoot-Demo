@@ -54,4 +54,9 @@ public class BasicAuthController {
         map.put("message", "Registered Successfully");
         return new ResponseEntity<>(map, HttpStatus.OK);
     }
+
+    private Map<String, String> generateJWTToken(Users users){
+        long timestamp = System.currentTimeMillis();
+        return  null;
+    }
 }

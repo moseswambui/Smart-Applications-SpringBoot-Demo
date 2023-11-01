@@ -2,6 +2,9 @@ package com.SpringJpa.Repositories;
 
 import com.SpringJpa.Entities.Users;
 import com.SpringJpa.Exceptions.EtAuthException;
+
+import org.bouncycastle.crypto.generators.BCrypt;
+import org.bouncycastle.crypto.generators.OpenBSDBCrypt;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -28,6 +31,7 @@ public class UserRepositoryImpl implements UserRepository{
 
     @Override
     public Integer create(String firstName, String lastName, String email, String password) throws EtAuthException {
+        //String hashedPassword = BCrypt.passwordToByteArray(password, BCrypt.passwordToByteArray("mu))
         try {
             KeyHolder keyHolder = new GeneratedKeyHolder();
 
